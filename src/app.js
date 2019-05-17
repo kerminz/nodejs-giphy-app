@@ -1,26 +1,40 @@
 const request = require('request')
 const express = require('express')
+const giphy = require('./utils/giphy')
+const hbs = require('hbs')
+const path = require('path')
 
 const app = express()
 
-const giphyApiKey = process.env.giphyApiKey
+const port = process.env.PORT || 3000
+
+// Define paths for express config
+const publicDirectoryPath = path.join(__dirname, '../public')
+const viewsDirectoryPath = path.join(__dirname, '../templates/views')
+const partialDirectoryPath = path.join(__dirname, '../templates/partials')
+
+// Setup handlebars und view engine
+app.set('view engine', 'hbs')
+app.set('views', viewsDirectoryPath)
+hbs.registerPartials(partialDirectoryPath)
+
+// Setup static directory to server
+app.use(express.static(publicDirectoryPath))
 
 app.get('/', (req, res) => {
 
     if (!req.query.search) {
-        return res.send('Please provide a search string...')
-    }
-    
-    const url = 'http://api.giphy.com/v1/gifs/search?q=' + encodeURIComponent(req.query.search) + '&api_key=' + giphyApiKey
+        return error = "Unable to connect."
+    } 
 
-    request( { url, json: true }, (error, {body}) => {
-        if (error) {
-            return res.send('Unable to connect.')
-        }
-        res.send(body)
+    giphy(req.query.search, (error, {url, title}) => {
+        res.render('index', {
+            url,
+            title
+        })
     })
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server is up!')
 })
