@@ -13,7 +13,7 @@ const giphy = (term, callback) => {
         }
 
         callback(undefined, {
-            url: res.body.data[0].images.preview_gif.url,
+            url: res.body.data[0].images.original.url,
             title: res.body.data[0].title
         })
     })

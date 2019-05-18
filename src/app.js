@@ -21,10 +21,6 @@ hbs.registerPartials(partialDirectoryPath)
 // Setup static directory to server
 app.use(express.static(publicDirectoryPath))
 
-// Middleware to extract post body
-app.use(express.urlencoded())
-
-
 app.get('/', (req, res) => {
 
     if (!req.query.search) {

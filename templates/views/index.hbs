@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <link rel="stylesheet" href="css/style.css"/>
     </head>
     <body>
-        <form>
-            <input name="term" type="text" id="term" placeholder="Enter Search Term"/>
-            <button name="submit" id="submit">Send</button>
-        </form>
+        <div class="container">
+            <h1>Giphy Serach Engine</h1>
+            <p>Provide a search term an get a gif back</p>
+            <form>
+                <input name="term" type="text" id="term" placeholder="Enter Search Term"/>
+                <button name="submit" id="submit">Send</button>
+            </form>
 
-        <h2 id="title"></h2>
-        <img id="image" />
-
+            <h2 id="title"></h2>
+            <a id="link" href=""><img id="image" /></a>
+            
+            
+        </div>
         <script src="js/app.js"></script>
     </body>
     <footer>
-
+        <p><a href="https://www.kermin.de">Kermin.de</a></p>
     </footer>
 </html>
