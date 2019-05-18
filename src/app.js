@@ -21,14 +21,21 @@ hbs.registerPartials(partialDirectoryPath)
 // Setup static directory to server
 app.use(express.static(publicDirectoryPath))
 
+// Middleware to extract post body
+app.use(express.urlencoded())
+
+
 app.get('/', (req, res) => {
 
     if (!req.query.search) {
-        return error = "Unable to connect."
+        res.render('index', {
+            error: 'Unable to connect'
+        })
+        return
     } 
 
     giphy(req.query.search, (error, {url, title}) => {
-        res.render('index', {
+        res.send({
             url,
             title
         })

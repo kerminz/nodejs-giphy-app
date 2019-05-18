@@ -7,6 +7,7 @@ const giphy = (term, callback) => {
     const url = 'http://api.giphy.com/v1/gifs/search?q=' + encodeURIComponent(term) + '&api_key=' + giphyapiKey
 
     request({url, json: true}, (error, res) => {
+
         if (error) {
             return callback(error, undefined)
         }
